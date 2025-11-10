@@ -2,39 +2,65 @@ permalink: /404.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="noindex" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>404 — Page Not Found</title>
-  <link rel="stylesheet" href="html5reset.css">
-  <link rel="stylesheet" href="style.css">
-  <style>
-    body{font-family:system-ui,-apple-system,Segoe%20UI,Roboto,Arial,Helvetica,sans-serif;line-height:1.6;margin:0;padding:2rem}
-    .wrap{max-width:720px;margin:10vh auto;padding:2rem;border-radius:16px;border:1px solid #e5e7eb}
-    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:1rem}
-    .btn{display:inline-block;padding:.7rem 1rem;border-radius:10px;border:1px solid #d1d5db;text-decoration:none}
-  </style>
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="css/html5reset.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <main id="maincontent" class="wrap" role="main" tabindex="-1">
-    <h1>Page not found (404)</h1>
-    <p>The page you’re looking for doesn’t exist or has moved.</p>
-    <p>We will try to take you back to the previous page.</p>
-    <div class="actions">
-      <a href="#" id="backNow" class="btn">← Back to previous page</a>
-      <a href="index.html" class="btn">Home</a>
-    </div>
-    <p id="fallback" hidden>No history available. Please use the Home link.</p>
+  <header>
+    <a href="#maincontent" class="skip-link">Skip to main</a>
+    <img src="images/UMSI_signature_vertical_informal_solidblue.jpg" alt="UMSI Logo">
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="resume.html">Resumes</a></li>
+        <li><a href="Networking_and_Building_Connections.html">Networking</a></li>
+        <li><a href="Internship_Search.html">Internship</a></li>
+      </ul>
+    </nav>
+    <h1>Page Not Found (404)</h1>
+  </header>
+
+  <main id="maincontent">
+    <section>
+      <h2>We can’t find that page</h2>
+      <p>The page you’re looking for doesn’t exist or may have moved.</p>
+      <p>
+        <a href="#" id="backLink">← Back to previous page</a>
+        &nbsp;|&nbsp;
+        <a href="index.html">Go to Home</a>
+      </p>
+      <p id="fallback" hidden>No history available. Please use the Home link.</p>
+    </section>
+
+    <section>
+      <h2>Popular sections</h2>
+      <ul class="lotsoflinks">
+        <li><a href="resume.html">Resume Resources</a></li>
+        <li><a href="Networking_and_Building_Connections.html">Networking Tips</a></li>
+        <li><a href="Internship_Search.html">Internship Search</a></li>
+      </ul>
+    </section>
   </main>
+
+  <footer>
+    <p>University of Michigan School of Information | <a href="https://umich.instructure.com/courses/137916">UMSI Career Development Office</a></p>
+  </footer>
+
   <script>
-    (function(){
-      var sameOriginRef=false;
-      try{sameOriginRef=document.referrer&&new URL(document.referrer).origin===location.origin;}catch(e){}
-      var canGoBack=(history.length>1)||sameOriginRef;
-      if(canGoBack){setTimeout(function(){history.back();},1200);}else{document.getElementById('fallback').hidden=false;}
-      document.getElementById('backNow').addEventListener('click',function(e){
+    (function () {
+      var fallback = document.getElementById('fallback');
+      var back = document.getElementById('backLink');
+      var sameOriginRef = false;
+      try { sameOriginRef = document.referrer && new URL(document.referrer).origin === location.origin; } catch(e) {}
+      var canGoBack = (history.length > 1) || sameOriginRef;
+      if (!canGoBack) fallback.hidden = false;
+      back.addEventListener('click', function (e) {
         e.preventDefault();
-        if(canGoBack){history.back();}else{location.href='index.html';}
+        if (canGoBack) history.back(); else location.href = 'index.html';
       });
     })();
   </script>
