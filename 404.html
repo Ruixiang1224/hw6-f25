@@ -1,0 +1,77 @@
+permalink: /404.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — MSI Career Development Resource Hub</title>
+  <meta name="robots" content="noindex" />
+  <!-- Use the same CSS as the rest of the site.
+       If your CSS isn't inside /css, adjust these href paths. -->
+  <link rel="stylesheet" href="css/html5reset.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <a href="#maincontent" class="skip-link">Skip to main</a>
+    <img src="images/UMSI_signature_vertical_informal_solidblue.jpg" alt="UMSI Logo" />
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="resume.html">Resumes</a></li>
+        <li><a href="Networking_and_Building_Connections.html">Networking</a></li>
+        <li><a href="Internship_Search.html">Internship</a></li>
+      </ul>
+    </nav>
+    <h1>Page Not Found (404)</h1>
+  </header>
+
+  <main id="maincontent">
+    <section>
+      <h2>Oops — we can’t find that page</h2>
+      <p>Sorry, the page you’re looking for doesn’t exist or may have moved.</p>
+      <p>抱歉，您访问的页面不存在或已被移除。</p>
+
+      <h3>Try one of these popular sections:</h3>
+      <ul class="lotsoflinks">
+        <li><a href="index.html">🏠 Back to Home</a></li>
+        <li><a href="resume.html">📄 Resume Resources</a></li>
+        <li><a href="Networking_and_Building_Connections.html">🤝 Networking Tips</a></li>
+        <li><a href="Internship_Search.html">🧭 Internship Search</a></li>
+      </ul>
+
+      <p id="backWrap"><a href="#" id="backLink">← Go back to the previous page</a></p>
+    </section>
+
+    <section>
+      <h2>Report a broken link</h2>
+      <p>If you clicked a link and landed here, please tell us which page it was on so we can fix it.</p>
+      <p>
+        <a href="mailto:cdo@umich.edu?subject=Broken%20link%20report%20(Career%20Hub)&body=I%20found%20a%20broken%20link%20on%20the%20site:%20[please%20paste%20the%20URL%20here]">
+          Email the CDO Team
+        </a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      University of Michigan School of Information |
+      <a href="https://umich.instructure.com/courses/137916">UMSI Career Development Office</a>
+    </p>
+  </footer>
+
+  <script>
+    // Hide the "Go back" link if there is no history to go back to
+    (function () {
+      var link = document.getElementById('backLink');
+      var wrap = document.getElementById('backWrap');
+      if (history.length > 1) {
+        link.addEventListener('click', function (e) { e.preventDefault(); history.back(); });
+      } else {
+        wrap.style.display = 'none';
+      }
+    })();
+  </script>
+</body>
+</html>
