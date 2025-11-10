@@ -8,12 +8,35 @@ permalink: /404.html
   <title>404 — Page Not Found</title>
   <link rel="stylesheet" href="html5reset.css">
   <link rel="stylesheet" href="style.css">
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe%20UI,Roboto,Arial,Helvetica,sans-serif;line-height:1.6;margin:0;padding:2rem}
+    .wrap{max-width:720px;margin:10vh auto;padding:2rem;border-radius:16px;border:1px solid #e5e7eb}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:1rem}
+    .btn{display:inline-block;padding:.7rem 1rem;border-radius:10px;border:1px solid #d1d5db;text-decoration:none}
+  </style>
 </head>
 <body>
-  <main id="maincontent" role="main" tabindex="-1">
+  <main id="maincontent" class="wrap" role="main" tabindex="-1">
     <h1>Page not found (404)</h1>
     <p>The page you’re looking for doesn’t exist or has moved.</p>
-    <p><a href="index.html">Back to Home</a></p>
+    <p>We will try to take you back to the previous page.</p>
+    <div class="actions">
+      <a href="#" id="backNow" class="btn">← Back to previous page</a>
+      <a href="index.html" class="btn">Home</a>
+    </div>
+    <p id="fallback" hidden>No history available. Please use the Home link.</p>
   </main>
+  <script>
+    (function(){
+      var sameOriginRef=false;
+      try{sameOriginRef=document.referrer&&new URL(document.referrer).origin===location.origin;}catch(e){}
+      var canGoBack=(history.length>1)||sameOriginRef;
+      if(canGoBack){setTimeout(function(){history.back();},1200);}else{document.getElementById('fallback').hidden=false;}
+      document.getElementById('backNow').addEventListener('click',function(e){
+        e.preventDefault();
+        if(canGoBack){history.back();}else{location.href='index.html';}
+      });
+    })();
+  </script>
 </body>
 </html>
