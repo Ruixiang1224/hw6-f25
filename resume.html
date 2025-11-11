@@ -23,6 +23,10 @@
         <h1>Resume Support</h1>
 
     </header>
+    <aside id="page-toc" class="toc" aria-label="On-page navigation">
+  <button id="toc-toggle" class="toc-toggle" aria-expanded="true" aria-controls="toc-list">Contents</button>
+  <nav id="toc-list"></nav>
+</aside>
 <main id="maincontent">
   
   <section>
@@ -115,9 +119,82 @@
         <div></div> -->
     </main>
     <footer>
-        <p>University of Michigan School of Information | <a href="https://umich.instructure.com/courses/137916">UMSI Career Development Office </a></p>
+        <p>University of Michigan School of Information | <a href="https://umich.instructure.com/courses/137916">UMSI Career Development Office </a>© Copyrights <span id="year"></span> by Ruixiang. All rights reserved.</span></p>
         </footer>
     
 </body>
 
 </html>
+
+<script>
+document.getElementById("year").innerHTML = new Date().getFullYear();
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var main=document.getElementById('maincontent');
+  var toc=document.getElementById('page-toc');
+  var tocList=document.getElementById('toc-list');
+  var toggle=document.getElementById('toc-toggle');
+  if(!main||!toc||!tocList||!toggle)return;
+
+  var hs=[].slice.call(main.querySelectorAll('h2, h3'));
+  if(hs.length<3){ toc.style.display='none'; return; }
+
+  var slugMap={};
+  function slugify(t){
+    var s=t.trim().toLowerCase().replace(/[^a-z0-9\s\-]/g,'').replace(/\s+/g,'-').replace(/\-+/g,'-');
+    if(!s)s='section';
+    if(slugMap[s]){ slugMap[s]+=1; s=s+'-'+slugMap[s]; } else { slugMap[s]=1; }
+    return s;
+  }
+
+  hs.forEach(function(h){
+    if(!h.id){ h.id=slugify(h.textContent||h.innerText||'section'); }
+    if(!h.hasAttribute('tabindex')) h.setAttribute('tabindex','-1');
+  });
+
+  var ul=document.createElement('ul');
+  hs.forEach(function(h){
+    var li=document.createElement('li');
+    var a=document.createElement('a');
+    a.href='#'+h.id;
+    a.textContent=h.textContent||h.innerText||h.id;
+    if(h.tagName==='H3') a.classList.add('toc-h3');
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      h.scrollIntoView({behavior:reduce?'auto':'smooth', block:'start'});
+      history.pushState(null,'','#'+h.id);
+      h.focus({preventScroll:true});
+    });
+    li.appendChild(a);
+    ul.appendChild(li);
+  });
+  tocList.innerHTML='';
+  tocList.appendChild(ul);
+
+  if(!main.classList.contains('with-toc')) main.classList.add('with-toc');
+
+  var links=[].slice.call(tocList.querySelectorAll('a'));
+  var map={};
+  links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){
+        var id=en.target.id;
+        links.forEach(function(l){ l.classList.toggle('active', l===map[id]); });
+      }
+    });
+  },{ root:null, rootMargin:'-40% 0px -50% 0px', threshold:[0,1] });
+
+  hs.forEach(function(h){ obs.observe(h); });
+
+  toggle.addEventListener('click',function(){
+    var expanded=toggle.getAttribute('aria-expanded')==='true';
+    toggle.setAttribute('aria-expanded', String(!expanded));
+    tocList.style.display=expanded?'none':'block';
+  });
+});
+</script>
