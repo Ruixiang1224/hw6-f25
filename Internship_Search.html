@@ -8,10 +8,10 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header aria-label="Primary navigation">
+    <header>
         <a href="#maincontent" class="skip-link">Skip to main</a>
         <img src="images/UMSI_signature_vertical_informal_solidblue.jpg" alt="UMSI Logo">
-        <nav id="list">
+        <nav id="primarynav"  aria-label="Primary navigation">
           <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="resume.html">Resumes</a></li>
@@ -55,21 +55,18 @@
     Visit its.umich.edu/internship for everything you need to know about the ITS Internship Program.
   </p>
 
-  <figure>
-    <figcaption id="its-caption">
-      Video: ITS Internship application tips (captions available on YouTube).
-    </figcaption>
-
-    <iframe
-      src="https://www.youtube.com/embed/7j-k-PP_flg?si=dUu0tqYSPdmugNeX"
-      title="U-M ITS Internship Program — application tips"
-      aria-describedby="its-desc its-caption"
-      loading="lazy"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      referrerpolicy="strict-origin-when-cross-origin"
-      allowfullscreen>
-    </iframe>
-  </figure>
+<figure class="video-embed" aria-labelledby="yt1-title" aria-describedby="yt1-desc">
+  <button class="yt-play" data-ytid="VIDEO_ID" aria-label="Play: Using AI in Your Job Search">
+    <img src="THUMB_URL.jpg" alt="">
+    <span class="yt-play-icon" aria-hidden="true">▶</span>
+  </button>
+  <figcaption id="yt1-title"><strong>Using AI in Your Job Search</strong></figcaption>
+  <p id="yt1-desc" class="visually-hidden">Instructional video. See transcript below or open on YouTube.</p>
+  <p class="video-actions">
+    <a href="https://youtu.be/VIDEO_ID" target="_blank" rel="noopener">Open on YouTube</a> ·
+    <a href="#yt1-transcript">Skip to transcript</a>
+  </p>
+</figure>
 
   <p><a href="#top">Back to top</a></p>
 </section>
